@@ -1,5 +1,6 @@
 <h1>Your leave periods</h1>
 
+<div class="periods">
 <table>
     <thead>
         <tr>
@@ -46,6 +47,10 @@
     </tbody>
 </table>
 
+</div>
+
+<div class="controls">
+
 <%= link_to "Add a leave period", {action: "new"}, {class: "button"} %>
 
 <% if params['cancelled'] == 'false' %>
@@ -54,3 +59,4 @@
     <%= link_to "Hide cancelled", {action: "index", params: {:cancelled => false}}, {class: :button} %>
 <% end %>
 
+</div>
