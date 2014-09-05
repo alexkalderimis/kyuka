@@ -1,4 +1,7 @@
 class TimePeriodsController < ApplicationController
+    extend SimpleCalendar
+
+    has_calendar :attribute => :start_date
 
     def new
         @period = TimePeriod.new

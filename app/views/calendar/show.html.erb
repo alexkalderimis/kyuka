@@ -1,0 +1,5 @@
+<%= month_calendar start_date: @day_0,
+                   previous_link: ->(param, date_range) { link_to raw("&laquo;"), {:year => date_range.first.year, :month => date_range.first.month } },
+                   next_link: ->(param, date_range) { link_to raw("&raquo;"), {:year => date_range.last.year, :month => date_range.last.month } } do |date| %>
+  <%= date %>
+<% end %>

@@ -22,6 +22,7 @@ module Kyuka
 
     # For Foundation 5
     config.assets.precompile += %w( vendor/modernizr )
+    config.autoload_paths << "#{config.root}/lib"
 
   end
 end
