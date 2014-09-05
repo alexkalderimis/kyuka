@@ -1,0 +1,30 @@
+<h2><%= @period.category.capitalize %> Details</h2>
+
+<p>
+    <strong>Start date:</strong>
+    <%= @period.start_date %>
+</p>
+</p>
+    <strong>End date:</strong>
+    <%= @period.end_date %>
+</p>
+<% unless @period.comment.nil? %>
+    </p>
+        <strong>Comment:</strong>
+        <%= @period.comment %>
+    </p>
+<% end %>
+</p>
+    <strong>Created at:</strong>
+    <%= @period.created_at %>
+</p>
+
+<% if @period.cancelled %>
+    <p><strong>cancelled</strong></p>
+<% else %>
+    <%= form_for @period do |f| %>
+        <%= hidden_field_tag :cancelled, true %>
+        <%= f.submit "Cancel this leave period", :class => "button" %>
+    <% end %>
+<% end %>
+

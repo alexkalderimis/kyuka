@@ -1,0 +1,39 @@
+<h1>Add a leave period</h1>
+
+<%= form_for :time_period, url: time_periods_path do |f| %>
+    <% if @period.errors.any? %>
+        <div id="error_explanation">
+            <h2><%= pluralize(@period.errors.count, "error") %> prevented saving this time period.</h2>
+            <ul>
+                <% @period.errors.full_messages.each do |msg| %>
+                    <li><%= msg %></li>
+                <% end %>
+            </ul>
+        </div>
+    <% end %>
+    <div class="row">
+        <div class="large-6 columns">
+            <%= f.label :start_date %><br>
+            <%= date_select(:time_period, :start_date) %>
+        </div>
+        <div class="large-6 columns">
+            <%= f.label :end_date %><br>
+            <%= date_select(:time_period, :end_date) %>
+        </div>
+    </div>
+    <div class="row">
+        <div class="medium-6 columns">
+            <%= f.label :comment %><br>
+            <%= f.text_field :comment %>
+        </div>
+        <div class="medium-6 columns">
+            <%= f.label :category %><br>
+            <%= f.select(:category, [:holiday, :meeting, :medical, :other]) %>
+        </div>
+    </div>
+    <div class="row">
+        <%= f.submit class: 'button expand' %>
+    </div>
+<% end %>
+    
+

@@ -1,0 +1,56 @@
+<h1>Your leave periods</h1>
+
+<table>
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Created</th>
+            <th>Start Date</th>
+            <th>End Date</th>
+            <th>Length</th>
+            <th>Category</th>
+            <th>Comment</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        <% @periods.each do |period| %>
+            <tr class="<%= period.cancelled ? 'cancelled' : '' %>" >
+                <td><%= link_to period.id, period %></td>
+                <td><%= time_ago_in_words(period.created_at) %> ago</td>
+                <td>
+                    <% if period.start_date.nil? %>
+                        <em>none</em>
+                    <% else %>
+                        <%= period.start_date %>
+                    <% end %>
+                </td>
+                <td>
+                    <% if period.end_date.nil? %>
+                        <em>none</em>
+                    <% else %>
+                        <%= period.end_date %>
+                    <% end %>
+                </td>
+                <td>
+                    <% if period.start_date.nil? or period.end_date.nil? %>
+                        <em>Unknown length</em>
+                    <% else %>
+                        <%= distance_of_time_in_words(period.start_date, period.end_date) %>
+                    <% end %>
+                </td>
+                <td><%= period.category %></td>
+                <td><%= period.comment %></td>
+            </tr>
+        <% end %>
+    </tbody>
+</table>
+
+<%= link_to "Add a leave period", {action: "new"}, {class: "button"} %>
+
+<% if params['cancelled'] == 'false' %>
+    <%= link_to "Show cancelled", {action: "index", params: {}}, {class: :button} %>
+<% else %>
+    <%= link_to "Hide cancelled", {action: "index", params: {:cancelled => false}}, {class: :button} %>
+<% end %>
+
