@@ -24,6 +24,7 @@
 }
 
 .calendar-header {
+    @extend .row;
     height: 100%;
     background: $primary-color;
     color: $snow;
@@ -32,7 +33,8 @@
     }
     .next {
     }
-    .calendar-title {
+    .calendar-title h2 {
+        color: $snow;
     }
 }
 
