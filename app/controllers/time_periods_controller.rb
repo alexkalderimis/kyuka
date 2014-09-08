@@ -8,12 +8,9 @@ class TimePeriodsController < ApplicationController
     end
 
     def index
-        terms = search_terms
-        if terms.empty?
-            @periods = TimePeriod.all
-        else
-            logger.info terms
-            @periods = TimePeriod.where(terms)
+        @periods = {}
+        TimePeriod.statuses.each do |name, value|
+            @periods[name] = TimePeriod.send(name)
         end
     end
 

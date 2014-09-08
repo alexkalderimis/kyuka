@@ -1,0 +1,9 @@
+<% if period.accepted? %>
+    <span>
+    <%= form_for period do |f| %>
+        <%= hidden_field_tag :status, TimePeriod.statuses[:cancelled] %>
+        <%= f.submit ([:tiny, :small].include? size) ? 'Cancel' : "Cancel this leave", :class => "button #{ size }" %>
+    <% end %>
+    </span>
+<% end %>
+

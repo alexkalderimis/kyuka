@@ -6,4 +6,5 @@ module CalendarHelper
         classes << 'weekend' if (current_date.saturday? || current_date.sunday?)
         classes.join ' '
     end
+
 end

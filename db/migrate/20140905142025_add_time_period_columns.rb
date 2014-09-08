@@ -7,9 +7,9 @@ class AddTimePeriodColumns < ActiveRecord::Migration
   end
 
   def down
-      drop_column :time_periods, :start_date, :datetime
-      drop_column :time_periods, :end_date, :datetime
-      drop_column :time_periods, :cancelled, :boolean
-      drop_column :time_periods, :comment, :text
+      remove_column :time_periods, :start_date
+      remove_column :time_periods, :end_date
+      remove_column :time_periods, :cancelled
+      remove_column :time_periods, :comment
   end
 end

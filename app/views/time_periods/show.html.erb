@@ -19,7 +19,7 @@
     <%= @period.created_at %>
 </p>
 
-<% if @period.cancelled %>
+<% if @period.cancelled? %>
     <p><strong>cancelled</strong></p>
 <% end %>
 
@@ -27,12 +27,6 @@
 
 <%= link_to "View all", {action: "index"}, {class: "button"} %>
 
-<% unless @period.cancelled %>
-    <%= form_for @period do |f| %>
-        <%= hidden_field_tag :cancelled, true %>
-        <%= f.submit "Cancel this leave period", :class => "button" %>
-    <% end %>
-<% end %>
-
+<%= render partial: "cancel_button", locals: {size: '', period: @period} %>
 
 </div>

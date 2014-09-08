@@ -1,6 +1,15 @@
 <%= month_calendar start_date: @day_0,
-                   td: ->(start_date, current_date) { {class: cell_class(current_date) } },
-                   previous_link: ->(param, date_range) { link_to raw("&laquo;"), {:year => date_range.first.year, :month => date_range.first.month } },
-                   next_link: ->(param, date_range) { link_to raw("&raquo;"), {:year => date_range.last.year, :month => date_range.last.month } } do |date| %>
-  <%= date %>
+                   events: @leave,
+                   title: ->(start_date)   { content_tag :div, content_tag(:h2, "#{ I18n.t("date.month_names")[start_date.month] } #{ start_date.year }"), class: "small-8 columns calendar-title" },
+                   td: ->(_, current_date) { {class: cell_class(current_date) } },
+                   previous_link: ->(_, _) { link_to raw("&laquo;"), month_params(-1.month), class: "small-2 columns button prev" },
+                   next_link:     ->(_, _) { link_to raw("&raquo;"), month_params(1.month), class: "small-2 columns button next" } do |date, events| %>
+  <span class="date"><%= date.to_s :eby %></span>
+  <ul class="events">
+    <% events.select{|e| e.includes(date)}.each do |time_off| %>
+        <li class="<%= time_off.category %> <%= time_off.status %>">
+            <%= (time_off.comment && time_off.comment != '') ? time_off.comment : time_off.category %>
+        </li>
+    <% end %>
+  </ul>
 <% end %>

@@ -2,6 +2,8 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
+@import 'foundation';
+
 .bank-holiday {
     background: orangered;
     color: white;
@@ -9,4 +11,41 @@
 .weekend {
     background: #bcbcbc;
     color: white;
+}
+.events {
+    padding: 0;
+    margin: 0;
+    li {
+        padding: 0.1em 0.2em;
+        list-style-type: none;
+        border-bottom: 1px solid white;
+    }
+
+}
+
+.calendar-header {
+    height: 100%;
+    background: $primary-color;
+    color: $snow;
+    .prev {
+        
+    }
+    .next {
+    }
+    .calendar-title {
+    }
+}
+
+
+td {
+    vertical-align: top;
+    .holiday {
+        background: $success-color;
+    }
+    .meeting {
+        background: $info-color;
+    }
+    .cancelled {
+        opacity: 0.5;
+    }
 }
