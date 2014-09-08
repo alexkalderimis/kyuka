@@ -24,6 +24,9 @@ gem 'foundation-rails'
 # For rendering calendars.
 gem "simple_calendar", "~> 1.1.0"
 
+# for determining if a date is a bank holiday.
+gem 'bank_holiday'
+
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
 # Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
