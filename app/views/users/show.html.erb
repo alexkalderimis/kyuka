@@ -1,14 +1,83 @@
 <p id="notice"><%= notice %></p>
 
-<p>
-  <strong>Identifier:</strong>
-  <%= @user.identifier %>
-</p>
+<div class="row">
+    <p class="medium-6 columns">
+        <strong>Identifier:</strong>
+        <%= @user.identifier %>
+    </p>
+    <div class="medium-6 columns">
+        <ul class="right button-group">
+            <li>
+            <%= link_to 'Edit', edit_user_path(@user), class: :button %>
+            </li><li>
+            <%= link_to 'Back', users_path, class: :button %>
+            </li>
+        </ul>
+    </div>
+</div>
 
-<ul class="button-group">
-    <li>
-    <%= link_to 'Edit', edit_user_path(@user), class: :button %>
-    </li><li>
-    <%= link_to 'Back', users_path, class: :button %>
-    </li>
-</ul>
+<div class="row">
+  <div class="large-12 columns">
+    <h3>Allowances:</h3>
+    <% unless @user.allowances.empty? %>
+        <table>
+            <thead>
+                <tr>
+                    <th>Year</th>
+                    <th>Allowance</th>
+                    <th>Remaining</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <% @user.allowances.each do |allowance| %>
+                <tr>
+                    <td><%= allowance.year %></td>
+                    <td><%= allowance.max_days %></td>
+                    <td>
+                        <% if allowance.year? and allowance.max_days? %>
+                            <%= allowance.max_days - @user.holiday_taken_in(allowance.year) %>
+                        <% end %>
+                    </td>
+                    <td>
+                        <ul class="right button-group tiny">
+                            <li>
+                                <%= link_to "Edit", edit_user_allowance_path(@user, allowance), class: "button tiny" %>
+                            </li>
+                            <li>
+                                <%= link_to "Delete", user_allowance_path(@user, allowance), method: :delete, class: "button tiny"%>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+            <% end %>
+        </table>
+    <% end %>
+
+    <%= link_to 'Add allowance', new_user_allowance_path(@user), class: "button tiny" %>
+  </div>
+</div>
+<div class="row">
+  <div class="large-6 columns">
+
+    <h3>Roles:</h3>
+    <% unless @user.roles.empty? %>
+        <table>
+            <thead>
+                <tr>
+                    <th>Role</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <% @user.roles.each do |role| %>
+                <tr>
+                    <td><%= role.name %></td>
+                    <td><%= link_to "Remove", user_role_path(@user, role), class: "right button tiny", method: :delete, data: {confirm: 'Remove role?'} %></td>
+                </tr>
+            <% end %>
+        </table>
+    <% end %>
+
+    <%= link_to 'Add role', new_user_role_path(@user), class: "button tiny" %>
+  </div>
+</div>
+

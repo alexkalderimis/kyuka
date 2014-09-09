@@ -5,3 +5,12 @@
 #
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
+
+admin_user = User.find_or_create_by(identifier: 'admin')
+admin_role = Role.find_or_create_by(name: 'admin')
+
+unless admin_user.roles.include? admin_role
+    admin_user.roles << admin_role
+end
+
+

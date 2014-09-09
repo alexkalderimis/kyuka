@@ -1,5 +1,9 @@
 Rails.application.routes.draw do
-  resources :users
+
+  resources :users do
+      resources :roles
+      resources :allowances
+  end
 
   resources :time_periods
 

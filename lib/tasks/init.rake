@@ -7,6 +7,7 @@ namespace :init do
     by_year = BankHoliday.all.group_by do |bh|
       Date.parse(bh.date).year
     end
+    admin_user = User.find_or_create_by(identifier: Settings.users.admin)
     by_year.each do |year, hols|
       year_range = Date.new(year, 1, 1) .. Date.new(year, 12, 31)
       puts "==> Updating holidays for #{ year }"
@@ -24,6 +25,7 @@ namespace :init do
             comment: comment,
             category: TimePeriod.categories[:bankholiday]
           )
+          period.user = admin_user
           period.status = :active
           raise "Error saving #{ hol }" unless period.save
         end

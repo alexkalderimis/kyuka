@@ -1,0 +1,13 @@
+<%= form_for [@user, @allowance] do |f| %>
+    <div class="row">
+        <div class="medium-6 columns">
+            <%= f.label :year %>
+            <%= f.number_field :year, in: (Time.now.year - 10) .. (Time.now.year + 10), step: 1 %>
+        </div>
+        <div class="medium-6 columns">
+            <%= f.label :max_days %>
+            <%= f.number_field :max_days, in: 0 .. 365, step: 1 %>
+        </div>
+    </div>
+    <%= f.submit class: "button expand" %>
+<% end %>
