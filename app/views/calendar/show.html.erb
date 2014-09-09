@@ -1,15 +1,18 @@
 <%= month_calendar start_date: @day_0,
-                   events: @leave.active,
+                   events: @leave,
                    title: calendar_title,
+                   table: { class: "month-calendar row" },
                    td: ->(_, current_date) { {class: cell_class(current_date) } },
                    previous_link: calendar_link(:prev),
                    next_link:     calendar_link(:next) do |date, events| %>
-  <span class="date"><%= date.to_s :eby %></span>
-  <ul class="events">
-    <% events.select{|e| e.includes(date)}.each do |time_off| %>
-        <li class="<%= time_off.category %> <%= time_off.status %>">
-            <%= (time_off.comment && time_off.comment != '') ? time_off.comment : time_off.category %>
-        </li>
-    <% end %>
-  </ul>
+  <div class="date">
+    <span class="eby"><%= date.to_s :eby %></span>
+    <ul class="events">
+        <% events.select{|e| e.includes(date)}.each do |time_off| %>
+            <li class="<%= time_off.category %> <%= time_off.status %>">
+                <%= (time_off.comment && time_off.comment != '') ? time_off.comment : time_off.category %>
+            </li>
+        <% end %>
+    </ul>
+  </div>
 <% end %>

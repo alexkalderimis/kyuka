@@ -1,8 +1,13 @@
 <div class="splash">
-    <% if @user %>
-        <h2>Hello <%= @user.identifier %></h2>
-    <% else %>
-        <h2>Welcome to Kyuka</h2>
-    <% end %>
+
+    <div class="welcome">
+        <% if @user %>
+            <h2>Hello <%= @user.identifier %></h2>
+        <% else %>
+            <%= link_to login_path, :class => "button" do %>
+                Log in to <span class="app-name">Kyuka</span>
+            <% end %>
+        <% end %>
+    </div>
 
 </div>

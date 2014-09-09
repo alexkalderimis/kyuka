@@ -4,7 +4,9 @@ class CalendarController < ApplicationController
 
     def show
         @day_0 = Date.new(params[:year].to_i, params[:month].to_i, 1)
-        @leave = TimePeriod.overlapping(@day_0 .. (@day_0 + 1.month))
+        range = @day_0 .. (@day_0 + 1.month)
+        @leave = @current_user.time_periods.overlapping(range).active.to_a
+        @leave += TimePeriod.active.overlapping(range).where(:category => TimePeriod.categories[:bankholiday])
     end
 
     def month_params delta

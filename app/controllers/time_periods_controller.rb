@@ -16,11 +16,11 @@ class TimePeriodsController < ApplicationController
             @status = :active
         end
 
-        @periods = TimePeriod.send(@status)
+        @periods = @current_user.time_periods.send(@status)
     end
 
     def create
-        @period = TimePeriod.new(period_params)
+        @period = @current_user.time_periods.build(period_params)
         if Settings.holiday.policy == 'accept'
             @period.status = :active
         end
@@ -33,11 +33,11 @@ class TimePeriodsController < ApplicationController
     end
 
     def show
-        @period = TimePeriod.find(params[:id])
+        @period = @current_user.time_periods.find(params[:id])
     end
 
     def update
-        @period = TimePeriod.find(params[:id])
+        @period = @current_user.time_periods.find(params[:id])
         @period.update_attributes update_params
         @period.save
         redirect_to @period

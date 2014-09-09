@@ -1,14 +1,20 @@
-<h1>Choose your provider</h1>
-<ul class="button-group">
-    <li>
-        <%= link_to "Raven", "/auth/raven", class: "button" %>
-    </li>
-    <li>
-        <%= link_to "OpenID", "/auth/open_id", class: "button" %>
-    </li>
-    <% unless Rails.env.production? %>
-        <li>
-            <%= link_to "Dev", "/auth/developer", class: "button" %>
-        </li>
-    <% end %>
-</ul>
+<div class="row">
+    <div class="small-12 columns">
+        <h2>Choose your provider</h2>
+    </div>
+    <div class="small-12 columns">
+        <ul class="button-group">
+            <li>
+                <%= link_to "Raven", "/auth/raven", class: "button" %>
+            </li>
+            <li>
+                <%= link_to "OpenID", "/auth/open_id", class: "button" %>
+            </li>
+            <% unless Rails.env.production? %>
+                <li>
+                    <%= link_to "Dev", "/auth/developer", class: "button" %>
+                </li>
+            <% end %>
+        </ul>
+    </div>
+</div>
