@@ -7,12 +7,24 @@
                    next_link:     calendar_link(:next) do |date, events| %>
   <div class="date">
     <span class="eby"><%= date.to_s :eby %></span>
-    <ul class="events">
-        <% events.select{|e| e.includes(date)}.each do |time_off| %>
-            <li class="<%= time_off.category %> <%= time_off.status %>">
-                <%= (time_off.comment && time_off.comment != '') ? time_off.comment : time_off.category %>
-            </li>
-        <% end %>
-    </ul>
+    <% if events.any? {|e| e.includes(date) } %>
+        <ul class="events">
+            <% events.select{|e| e.includes(date)}.
+                      sort_by{|e| e.start_date }.each do |time_off| %>
+                <li class="<%= time_off.category %> <%= time_off.status %>">
+                    <% unless time_off.bankholiday? %>
+                        <span class="right">
+                            <%= render partial: 'time_periods/cancel_button', locals: {period: time_off, size: :tiny} %>
+                        </span>
+                    <% end %>
+                    <span class="title">
+                        <%= (time_off.comment && time_off.comment != '') ? time_off.comment : time_off.category %>
+                    </span>
+                </li>
+            <% end %>
+        </ul>
+    <% else %>
+        <%= link_to "Add leave", new_time_period_path(start_date: date), class: "button secondary" %>
+    <% end %>
   </div>
 <% end %>

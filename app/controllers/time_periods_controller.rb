@@ -6,7 +6,19 @@ class TimePeriodsController < ApplicationController
     has_calendar :attribute => :start_date
 
     def new
-        @period = TimePeriod.new
+        @period = @current_user.time_periods.build
+
+        if params[:start_date]
+            @period.start_date = Date.parse(params[:start_date])
+        else
+            @period.start_date = Time.now.to_date
+        end
+        if params[:end_date]
+            @period.end_date = Date.parse(params[:end_date])
+        else
+            @period.end_date = @period.start_date + 1.week
+        end
+
     end
 
     def index

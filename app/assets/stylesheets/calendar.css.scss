@@ -12,6 +12,15 @@
         .eby {
             padding-left: 1em;
         }
+        .button.secondary {
+            width: 100%;
+            color: rgba($body-font-color, 0.25);
+            background: rgba($secondary-color, 0.25);
+        }
+        .button.secondary:hover {
+            color: $body-font-color;
+            background: $secondary-button-bg-hover;
+        }
         .date {
             min-height: 5em;
         }
@@ -34,9 +43,17 @@
     margin-right: -2px;
 
     li {
+        font-size: 12px;
         padding: 0.1em 0.2em;
         list-style-type: none;
         border-bottom: 1px solid white;
+        .title {
+            font-size: 14px;
+        }
+        .button.tiny {
+            padding-left: 10px;
+            padding-right: 10px;
+        }
     }
     li:last-child {
         border-bottom: none;
@@ -77,13 +94,26 @@ td {
     .holiday {
         background: $success-color;
         color: $snow;
+        .button.tiny {
+            background: $success-color;
+        }
+        .button.tiny:hover {
+            background: darken($success-color, 10%);
+        }
     }
     .meeting {
         background: $info-color;
         color: $body-font-color;
+        .button.tiny {
+            background: $info-color;
+        }
+        .button.tiny:hover {
+            background: darken($info-color, 10%);
+        }
     }
     .bankholiday {
         background: $warning-color;
+        color: $snow;
     }
     .cancelled {
         opacity: 0.5;
