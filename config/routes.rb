@@ -1,5 +1,11 @@
 Rails.application.routes.draw do
 
+  get 'sessions/new'
+
+  get 'sessions/create'
+
+  get 'sessions/failure'
+
   resources :users do
       resources :roles
       resources :allowances
@@ -14,6 +20,11 @@ Rails.application.routes.draw do
   root 'welcome#index'
 
   get 'calendar/:year/:month' => 'calendar#show', as: :month
+
+  get '/login', :to => 'sessions#new', :as => :login
+  get '/logout', :to => 'sessions#destroy', :as => :logout
+  match '/auth/:provider/callback', :via => [:get, :post], :to => 'sessions#create'
+  match '/auth/failure',  :via => [:get, :post], :to => 'sessions#failure'
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'

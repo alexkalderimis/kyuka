@@ -2,7 +2,9 @@ class User < ActiveRecord::Base
 
     has_many :allowances
     has_many :time_periods
+    has_many :authorizations
     has_and_belongs_to_many :roles
+    validates :identifier, :presence => true
 
     def holiday_taken_in year
         year_range = Date.new(year, 1, 1) .. Date.new(year, 12, 31)

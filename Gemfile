@@ -30,6 +30,10 @@ gem 'bank_holiday'
 # For custom configuration
 gem 'rails_config'
 
+gem 'omniauth'
+gem 'omniauth-raven'
+gem 'omniauth-openid'
+
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
 # Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks

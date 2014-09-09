@@ -8,5 +8,10 @@
     <ul>
       <%= render 'layouts/navigation_links' %>
     </ul>
+    <% if session[:user_id] %>
+        <%= link_to "Log out", logout_path, class: 'button right' %>
+    <% else %>
+        <%= link_to "Log in", login_path, class: 'button right' %>
+    <% end %>
   </div>
 </nav>

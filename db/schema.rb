@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140909160851) do
+ActiveRecord::Schema.define(version: 20140909190220) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -25,6 +25,14 @@ ActiveRecord::Schema.define(version: 20140909160851) do
   end
 
   add_index "allowances", ["user_id"], name: "index_allowances_on_user_id", using: :btree
+
+  create_table "authorizations", force: true do |t|
+    t.string   "provider"
+    t.string   "uid"
+    t.integer  "user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "roles", force: true do |t|
     t.string   "name",       limit: 32
@@ -54,6 +62,7 @@ ActiveRecord::Schema.define(version: 20140909160851) do
     t.text     "identifier"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.text     "email"
   end
 
 end

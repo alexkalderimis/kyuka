@@ -1,11 +1,19 @@
 <%# add navigation links to this file %>
-<li class="<%= 'active' if request.env['PATH_INFO'] == time_periods_path %>">
-  <%= link_to 'Your leave', {controller: :time_periods, action: :index} %>
-</li>
-<li class="<%= 'active' if request.env['PATH_INFO'] == month_path(Time.now.year, Time.now.month) %>">
-  <%= link_to 'View Calendar', month_path(Time.now.year, Time.now.month) %>
-</li>
-<li class="<%= 'active' if request.env['PATH_INFO'] == users_path %>">
-  <%= link_to 'Users', users_path %>
-</li>
+<% if logged_in? %>
+    <li class="<%= 'active' if request.env['PATH_INFO'] == time_periods_path %>">
+        <%= link_to 'Your leave', {controller: :time_periods, action: :index} %>
+    </li>
+    <li class="<%= 'active' if request.env['PATH_INFO'] == month_path(Time.now.year, Time.now.month) %>">
+        <%= link_to 'View Calendar', month_path(Time.now.year, Time.now.month) %>
+    </li>
+    <% if @user.roles.find_by_name("admin") %>
+        <li class="<%= 'active' if request.env['PATH_INFO'] == users_path %>">
+            <%= link_to 'Users', users_path %>
+        </li>
+    <% else %>
+        <li class="<%= 'active' if request.env['PATH_INFO'] == user_path(@user) %>">
+            <%= link_to 'My profile', user_path(@user) %>
+        </li>
+    <% end %>
+<% end %>
 

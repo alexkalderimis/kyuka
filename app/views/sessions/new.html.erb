@@ -1,0 +1,14 @@
+<h1>Choose your provider</h1>
+<ul class="button-group">
+    <li>
+        <%= link_to "Raven", "/auth/raven", class: "button" %>
+    </li>
+    <li>
+        <%= link_to "OpenID", "/auth/openid", class: "button" %>
+    </li>
+    <% unless Rails.env.production? %>
+        <li>
+            <%= link_to "Dev", "/auth/developer", class: "button" %>
+        </li>
+    <% end %>
+</ul>
