@@ -1,4 +1,4 @@
-<% if period.accepted? %>
+<% if period.active? %>
     <span>
     <%= form_for period do |f| %>
         <%= hidden_field_tag :status, TimePeriod.statuses[:cancelled] %>

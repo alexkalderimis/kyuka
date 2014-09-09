@@ -1,27 +1,46 @@
-<h1>Your leave periods</h1>
+<section>
+    <h1>Your <%= @status %> leave periods</h1>
 
-<div class="periods">
+    <div class="controls right">
 
-<% TimePeriod.statuses.each do |status, _| %>
-    <% unless @periods[status].empty? %>
-        <h2><%= status %></h2>
+        <%= link_to "Add a leave period", {action: "new"}, {class: "button"} %>
+
+    </div>
+
+    <dl class="sub-nav left">
+        <dt>Filter:</dt>
+        <% TimePeriod.statuses.keys.each do |status| %>
+            <dd class="<%= (status.to_sym == @status) ? 'active' : ''%>">
+                <%= link_to status, {params: {status: status}} %>
+            </dd>
+        <% end %>
+    </dl>
+</section>
+
+<section class="periods">
+
+  <% TimePeriod.categories.keys.each do |category| %>
+    <h3><%= category %></h3>
+    <% if @periods.send(category).empty? %>
+        <div class="panel callout">
+            <p>You don't have any <%= @status %> <%= category %> time-periods</p>
+        </div>
+    <% else %>
         <table>
             <thead>
                 <tr>
-                    <th>ID</th>
                     <th>Created</th>
-                    <th>Start Date</th>
-                    <th>End Date</th>
+                    <th>Dates</th>
                     <th>Length</th>
-                    <th>Category</th>
                     <th>Comment</th>
                 </tr>
             </thead>
 
             <tbody>
-                <% @periods[status].each do |period| %>
+                <% @periods.send(category).each do |period| %>
                     <tr class="<%= period.status %>" >
                         <td>
+                            <%= time_ago_in_words(period.created_at) %> ago
                             <ul class="button-group">
                                 <li><%= link_to "View", period, {class: "button tiny"} %></li>
                                 <li>
@@ -32,19 +51,17 @@
                                 </li>
                             </ul>
                         </td>
-                        <td><%= time_ago_in_words(period.created_at) %> ago</td>
                         <td>
                             <% if period.start_date.nil? %>
                                 <em>none</em>
                             <% else %>
-                                <%= period.start_date.to_date.to_s :eby %>
+                                <span><%= period.start_date.to_date.to_s :eby %></span>
                             <% end %>
-                        </td>
-                        <td>
+                            -
                             <% if period.end_date.nil? %>
                                 <em>none</em>
                             <% else %>
-                                <%= period.end_date.to_date.to_s :eby %>
+                                <span><%= period.end_date.to_date.to_s :eby %></span>
                             <% end %>
                         </td>
                         <td>
@@ -54,19 +71,12 @@
                                 <%= distance_of_time_in_words(period.start_date, period.end_date) %>
                             <% end %>
                         </td>
-                        <td><%= period.category %></td>
                         <td><%= period.comment %></td>
                     </tr>
                 <% end %>
             </tbody>
         </table>
     <% end %>
-<% end %>
+  <% end %>
+</section>
 
-</div>
-
-<div class="controls">
-
-<%= link_to "Add a leave period", {action: "new"}, {class: "button"} %>
-
-</div>

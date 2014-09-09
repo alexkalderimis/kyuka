@@ -1,11 +1,10 @@
 class TimePeriod < ActiveRecord::Base
 
-    enum status: [:requested, :accepted, :rejected, :cancelled]
+    enum status: [:requested, :active, :rejected, :cancelled]
+    enum category: [:holiday, :meeting, :medical, :bankholiday, :other]
 
     validates_date :start_date
     validates_date :end_date
-
-    validates :category, inclusion: {in: %w(holiday meeting medical other)}
 
     def self.overlapping(first, last)
         time_periods = TimePeriod.arel_table

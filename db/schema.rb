@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140908135744) do
+ActiveRecord::Schema.define(version: 20140909114226) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -22,8 +22,8 @@ ActiveRecord::Schema.define(version: 20140908135744) do
     t.datetime "start_date"
     t.datetime "end_date"
     t.text     "comment"
-    t.text     "category",   default: "holiday"
     t.integer  "status",     default: 0
+    t.integer  "category",   default: 0
   end
 
 end

@@ -8,10 +8,13 @@ class TimePeriodsController < ApplicationController
     end
 
     def index
-        @periods = {}
-        TimePeriod.statuses.each do |name, value|
-            @periods[name] = TimePeriod.send(name)
+        @status = (params[:status] || :active).to_sym
+        unless TimePeriod.statuses.include? @status
+            flash[:info] = "Invalid status: #{ @status }"
+            @status = :active
         end
+
+        @periods = TimePeriod.send(@status)
     end
 
     def create

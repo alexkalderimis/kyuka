@@ -12,13 +12,23 @@
  *
  *= require_tree .
  *= require_self
- *= require foundation
+ *= require foundation_and_overrides
  */
+
+@import 'foundation_and_overrides';
 
 .site {
     display: flex;
     min-height: 100vh;
     flex-direction: column;
+}
+
+.title-area {
+    .name {
+        text-transform: uppercase;
+        font-family: 'Permanent Marker', 'Arial', 'Sans Serif';
+        font-size: 36px;
+    }
 }
 
 main {
