@@ -9,9 +9,18 @@
 
     <dl class="sub-nav left">
         <dt>Filter:</dt>
-        <% TimePeriod.statuses.keys.each do |status| %>
-            <dd class="<%= (status.to_sym == @status) ? 'active' : ''%>">
-                <%= link_to status, {params: {status: status}} %>
+        <% TimePeriod.statuses.keys.map(&:to_sym).each do |status| %>
+            <dd class="<%= (status == @status) ? 'active' : ''%>">
+                <%= link_to({params: {status: status}}) do %>
+                    <%= status %>
+                    <% if status != @status %>
+                        <span class="round label">
+                            <%= TimePeriod.send(status.to_sym).
+                                where(['category <> ?', TimePeriod.categories[:bankholiday]]).
+                                size %>
+                        </span>
+                    <% end %>
+                <% end %>
             </dd>
         <% end %>
     </dl>
@@ -19,7 +28,7 @@
 
 <section class="periods">
 
-  <% TimePeriod.categories.keys.each do |category| %>
+  <% TimePeriod.categories.keys.reject{|c| c == 'bankholiday'}.each do |category| %>
     <h3><%= category %></h3>
     <% if @periods.send(category).empty? %>
         <div class="panel callout">

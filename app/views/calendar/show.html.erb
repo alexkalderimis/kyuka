@@ -1,9 +1,9 @@
 <%= month_calendar start_date: @day_0,
-                   events: @leave,
-                   title: ->(start_date)   { content_tag :div, content_tag(:h2, "#{ I18n.t("date.month_names")[start_date.month] } #{ start_date.year }"), class: "small-8 columns calendar-title" },
+                   events: @leave.active,
+                   title: calendar_title,
                    td: ->(_, current_date) { {class: cell_class(current_date) } },
-                   previous_link: ->(_, _) { link_to raw("&laquo;"), month_params(-1.month), class: "small-2 columns button prev" },
-                   next_link:     ->(_, _) { link_to raw("&raquo;"), month_params(1.month), class: "small-2 columns button next" } do |date, events| %>
+                   previous_link: calendar_link(:prev),
+                   next_link:     calendar_link(:next) do |date, events| %>
   <span class="date"><%= date.to_s :eby %></span>
   <ul class="events">
     <% events.select{|e| e.includes(date)}.each do |time_off| %>

@@ -19,6 +19,10 @@ class TimePeriodsController < ApplicationController
 
     def create
         @period = TimePeriod.new(period_params)
+        if Settings.holiday.policy == 'accept'
+            @period.status = :active
+        end
+
         if @period.save
             redirect_to @period
         else
@@ -33,25 +37,27 @@ class TimePeriodsController < ApplicationController
     def update
         @period = TimePeriod.find(params[:id])
         @period.update_attributes update_params
+        @period.save
         redirect_to @period
     end
 
     private
 
     def update_params
-        params.permit(:cancelled, :comment)
+        if params[:status]
+            {status: params[:status].to_i}
+        else
+            p = params.require(:time_period).permit(:comment, :start_date, :end_date, :category)
+            if p[:category]
+                p[:category] = TimePeriod.categories[p[:category]]
+            end
+
+            p
+        end
     end
 
     def period_params
         params.require(:time_period).permit(:start_date, :end_date, :comment, :category)
-    end
-
-    def search_terms
-        p = params.permit(:category, :cancelled)
-        if not p['cancelled'].nil?
-            p['cancelled'] = p['cancelled'] == 'true'
-        end
-        p
     end
 
 end

@@ -43,9 +43,11 @@ td {
     vertical-align: top;
     .holiday {
         background: $success-color;
+        color: $snow;
     }
     .meeting {
         background: $info-color;
+        color: $body-font-color;
     }
     .bankholiday {
         background: $warning-color;

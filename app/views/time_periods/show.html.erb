@@ -1,38 +1,97 @@
-<h2><%= @period.category.capitalize %> Details</h2>
+<h2><%= params[:edit] == 'true' ? 'Editing' : ''%> <%= @period.category.capitalize %> Details</h2>
 
-<p>
-    <strong>Start date:</strong>
-    <%= @period.start_date.to_date.to_s :eby %>
-</p>
-</p>
-    <strong>End date:</strong>
-    <%= @period.end_date.to_date.to_s :eby %>
-</p>
-<% unless @period.comment.nil? %>
-    </p>
-        <strong>Comment:</strong>
-        <%= @period.comment %>
-    </p>
-<% end %>
-</p>
-    <strong>Created at:</strong>
-    <%= @period.created_at %>
-</p>
-
-<% if @period.cancelled? %>
-    <p><strong>cancelled</strong></p>
+<% if @period.errors.any? %>
+    <div id="callout error panel">
+        <h5><%= pluralize(@period.errors.count, "error") %> prevented saving this time period.</h2>
+        <ul>
+            <% @period.errors.full_messages.each do |msg| %>
+                <li><%= msg %></li>
+            <% end %>
+        </ul>
+    </div>
 <% end %>
 
-<ul class="button-group controls">
+<div class="details">
+    <div class="row">
+        <div class="medium-6 columns">
+            <strong>Created at:</strong>
+            <%= @period.created_at %>
+        </div>
+        <% if @period.updated_at != @period.created_at %>
+            <div class="medium-6 columns">
+                <strong>Last edited:</strong>
+                <%= @period.updated_at %>
+            </div>
+        <% end %>
+    </div>
+    <% if params[:edit] != 'true' %>
+        <div class="row">
+            <div class="medium-6 columns">
+                <strong>Start date:</strong>
+                <%= @period.start_date.to_date.to_s :eby %>
+            </div>
+            <div class="medium-6 columns">
+                <strong>End date:</strong>
+                <%= @period.end_date.to_date.to_s :eby %>
+            </div>
+        </div>
+    <% end %>
+</div>
 
-    <li>
-        <%= link_to "View all", {action: "index"}, {class: "button"} %>
-    </li>
-    <li>
-        <%= link_to "Edit", {params: {edit: true}}, {class: "button"} %>
-    </li>
-    <li>
-        <%= render partial: "cancel_button", locals: {size: '', period: @period} %>
-    </li>
+<% if params[:edit] == 'true' %>
+    <%= form_for @period do |f| %>
+        <div class="row">
+            <div class="medium-6 columns">
+                <%= f.label :start_date %><br>
+                <%= date_select(:time_period, :start_date) %>
+            </div>
+            <div class="medium-6 columns">
+                <%= f.label :end_date %><br>
+                <%= date_select(:time_period, :end_date) %>
+            </div>
+        </div>
+        <div class="row">
+            <div class="medium-6 columns">
+                <%= f.label :comment %><br>
+                <%= f.text_field :comment %>
+            </div>
+            <% unless @period.bankholiday? %>
+                <div class="medium-6 columns">
+                    <%= f.label :category %><br>
+                    <%= f.select(:category, TimePeriod.categories.reject{|k| k == 'bankholiday'}.map{ |cat, val| [cat]}) %>
+                </div>
+            <% end %>
+        </div>
+        <div class="row">
+            <%= f.submit class: 'button expand' %>
+            <%= link_to "Cancel", @period, class: "button secondary" %>
+        </div>
+    <% end %>
+<% else %>
+    <% if @period.comment? %>
+        </p>
+            <strong>Comment:</strong>
+            <%= @period.comment %>
+        </p>
+    <% end %>
+    <% if @period.cancelled? %>
+        <p><strong>cancelled</strong></p>
+    <% end %>
 
-</ul>
+    <ul class="button-group controls">
+
+        <% unless params[:edit] == 'true' %>
+            <li>
+                <%= link_to "Edit", {params: {edit: true}}, {class: "button"} %>
+            </li>
+        <% end %>
+        <li>
+            <%= render partial: "cancel_button", locals: {size: '', period: @period} %>
+        </li>
+        <li>
+            <%= link_to "View all", {action: "index"}, {class: "button"} %>
+        </li>
+
+    </ul>
+<% end %>
+
