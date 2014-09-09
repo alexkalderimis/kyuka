@@ -47,6 +47,9 @@ td {
     .meeting {
         background: $info-color;
     }
+    .bankholiday {
+        background: $warning-color;
+    }
     .cancelled {
         opacity: 0.5;
     }
