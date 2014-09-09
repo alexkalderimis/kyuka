@@ -1,11 +1,15 @@
 <p id="notice"><%= notice %></p>
 
 <div class="row">
-    <p class="medium-6 columns">
+    <p class="medium-4 columns">
         <strong>Identifier:</strong>
         <%= @user.identifier %>
     </p>
-    <div class="medium-6 columns">
+    <p class="medium-4 columns">
+        <strong>Email:</strong>
+        <%= @user.email %>
+    </p>
+    <div class="medium-4 columns">
         <ul class="right button-group">
             <li>
             <%= link_to 'Edit', edit_user_path(@user), class: :button %>

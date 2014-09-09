@@ -1,9 +1,8 @@
-<% if @user %>
-    <h2>Hello <%= @user.identifier %></h2>
-<% else %>
-    <h2>Welcome to Kyuka</h2>
-<% end %>
+<div class="splash">
+    <% if @user %>
+        <h2>Hello <%= @user.identifier %></h2>
+    <% else %>
+        <h2>Welcome to Kyuka</h2>
+    <% end %>
 
-<p>
-The time is now: <%= Time.now %>
-</p>
+</div>

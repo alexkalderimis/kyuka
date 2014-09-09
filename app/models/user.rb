@@ -12,4 +12,8 @@ class User < ActiveRecord::Base
             total + [year_range.last, tp.end_date].min.jd - [year_range.first, tp.start_date].max.jd
         end
     end
+
+    def admin?
+        roles.find_by_name('admin')
+    end
 end

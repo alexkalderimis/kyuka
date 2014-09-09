@@ -1,6 +1,8 @@
 class TimePeriodsController < ApplicationController
     extend SimpleCalendar
 
+    before_filter :authorize
+
     has_calendar :attribute => :start_date
 
     def new

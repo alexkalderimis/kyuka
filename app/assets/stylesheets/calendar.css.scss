@@ -23,9 +23,15 @@
 
 }
 
+.clearfix:before, .clearfix:after {
+    flex-basis: 0;
+    order: 1;
+    content: "";
+}
+
 .calendar-header {
     @extend .row;
-    height: 100%;
+    @extend .clearfix;
     background: $primary-color;
     color: $snow;
     .prev {

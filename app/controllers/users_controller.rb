@@ -1,5 +1,10 @@
 class UsersController < ApplicationController
+
+  before_action :authorize
+
   before_action :set_user, only: [:show, :edit, :update, :destroy]
+
+  before_action :check_authorized, only: [:show, :edit, :update, :destroy]
 
   # GET /users
   # GET /users.json
@@ -62,6 +67,13 @@ class UsersController < ApplicationController
   end
 
   private
+
+    def check_authorized
+      unless (@user.id == @current_user.id) || @current_user.admin?
+          raise 403
+      end
+    end
+
     # Use callbacks to share common setup or constraints between actions.
     def set_user
       @user = User.find(params[:id])
