@@ -6,6 +6,8 @@ class TimePeriod < ActiveRecord::Base
     validates_date :start_date
     validates_date :end_date
 
+    belongs_to :user
+
     def self.overlapping(first, last)
         time_periods = TimePeriod.arel_table
         sd = time_periods[:start_date]

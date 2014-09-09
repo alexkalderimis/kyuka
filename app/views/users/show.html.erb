@@ -1,0 +1,14 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Identifier:</strong>
+  <%= @user.identifier %>
+</p>
+
+<ul class="button-group">
+    <li>
+    <%= link_to 'Edit', edit_user_path(@user), class: :button %>
+    </li><li>
+    <%= link_to 'Back', users_path, class: :button %>
+    </li>
+</ul>

@@ -1,2 +1,5 @@
 holiday:
     policy: accept
+    default_allowance: 30
+users:
+    admin: 'admin'

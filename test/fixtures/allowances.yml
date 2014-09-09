@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  year: 1
+  max_days: 1
+  user_id: 
+
+two:
+  year: 1
+  max_days: 1
+  user_id: 

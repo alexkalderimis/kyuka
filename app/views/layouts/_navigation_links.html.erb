@@ -5,4 +5,7 @@
 <li class="<%= 'active' if request.env['PATH_INFO'] == month_path(Time.now.year, Time.now.month) %>">
   <%= link_to 'View Calendar', month_path(Time.now.year, Time.now.month) %>
 </li>
+<li class="<%= 'active' if request.env['PATH_INFO'] == users_path %>">
+  <%= link_to 'Users', users_path %>
+</li>
 
