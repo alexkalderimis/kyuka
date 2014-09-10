@@ -35,7 +35,7 @@
           <tr>
             <td colspan="2"><%= name %></td>
             <% @range.each do |date| %>
-                <td>
+                <td class="<%= 'weekend' if (date.saturday? || date.sunday?) %>">
                     <div class="date">
                         <% if days_off.include? date %>
                             <span class="label holiday"></span>
