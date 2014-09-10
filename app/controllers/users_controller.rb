@@ -6,6 +6,8 @@ class UsersController < ApplicationController
 
   before_action :check_authorized, only: [:show, :edit, :update, :destroy]
 
+  before_action :check_admin, only: [:index, :new, :create]
+
   # GET /users
   # GET /users.json
   def index
@@ -70,7 +72,7 @@ class UsersController < ApplicationController
 
     def check_authorized
       unless (@user.id == @current_user.id) || @current_user.admin?
-          raise 403
+        render :status => :forbidden, :text => "Permission denied"
       end
     end
 

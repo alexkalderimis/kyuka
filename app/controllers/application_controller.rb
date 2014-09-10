@@ -16,4 +16,10 @@ class ApplicationController < ActionController::Base
   def authorize
       redirect_to login_path unless logged_in?
   end
+
+  def check_admin
+      unless logged_in? and current_user.admin?
+        render :status => :forbidden, :text => "Permission denied"
+      end
+  end
 end
