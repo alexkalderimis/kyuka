@@ -5,19 +5,35 @@
         </h2>
     </div>
 </div>
-<table class="calendar">
+<table class="calendar planner">
     <thead>
         <tr>
-            <th></th>
+            <th colspan="2"></th>
+            <% (@range.first.year .. @range.last.year).each do |y| %>
+                <th colspan="<%= @range.count {|d| d.year == y } %>">
+                    <%= y %>
+                </th>
+            <% end %>
+        </tr>
+        <tr>
+            <th colspan="2"></th>
+            <% (@range.first.month .. @range.last.month).each do |mon| %>
+                <th colspan="<%= @range.count {|d| d.month == mon } %>">
+                    <%= I18n.t("date.abbr_month_names")[mon] %>
+                </th>
+            <% end %>
+        </tr>
+        <tr>
+            <th colspan="2"></th>
             <% @range.each do |date| %>
-                <th><%= date.to_s :eby %></th>
+                <th class="day"><%= date.day %></th>
             <% end %>
         </tr>
     </thead>
     <tbody>
         <% @holidays.each do |name, days_off| %>
           <tr>
-            <td><%= name %></td>
+            <td colspan="2"><%= name %></td>
             <% @range.each do |date| %>
                 <td>
                     <div class="date">
