@@ -2,7 +2,7 @@
 # All this logic will automatically be available in application.js.
 # You can use CoffeeScript in this file: http://coffeescript.org/
 
-classes = ['river', 'waka', 'boat', 'bridge']
+classes = ['river', 'waka', 'boat', 'bridge', 'mountains']
 
 rotateSplashBg = ->
   splash = document.querySelector '.splash'
@@ -12,7 +12,6 @@ rotateSplashBg = ->
     if splash.classList.contains cls
       active = idx
       splash.classList.remove cls
-      console.log "Class was #{ cls }"
   nextClass = classes[(active + 1) % classes.length]
   splash.classList.add nextClass
   

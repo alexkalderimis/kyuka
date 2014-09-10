@@ -42,6 +42,14 @@ module ArelExtensions
     end
   end  
 end
+
+module DateExtensions
+    module Date
+        def within? range
+            (self >= range.first) && (self <= range.last)
+        end 
+    end
+end
  
 ActiveRecord::Base.extend(ArelExtensions::ActiveRecord::ClassMethods)
 Arel::Nodes::Node.send(:include, ArelExtensions::Nodes) 
