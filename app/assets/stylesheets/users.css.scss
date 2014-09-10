@@ -7,3 +7,14 @@ td {
         margin-bottom: 0;
     }
 }
+
+.container.user-details {
+    display: block;
+
+    .role {
+        font-size: 16px;
+        a {
+            color: white;
+        }
+    }
+}

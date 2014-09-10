@@ -21,6 +21,8 @@ Rails.application.routes.draw do
 
   get 'calendar/:year/:month' => 'calendar#show', as: :month
 
+  get 'planner' => 'planner#show', as: :planner
+
   get '/login', :to => 'sessions#new', :as => :login
   get '/logout', :to => 'sessions#destroy', :as => :logout
   match '/auth/:provider/callback', :via => [:get, :post], :to => 'sessions#create'

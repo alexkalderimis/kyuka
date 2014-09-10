@@ -4,7 +4,7 @@
 
 @import 'foundation_and_overrides';
 
-.month-calendar {
+table.calendar {
     flex: 1;
     td {
         padding-left: 0;
@@ -21,13 +21,17 @@
             color: $body-font-color;
             background: $secondary-button-bg-hover;
         }
-        .date {
-            min-height: 5em;
-        }
     }
 
 }
 
+table.month.calendar {
+    td {
+        .date {
+            min-height: 5em;
+        }
+    }
+}
 .bank-holiday {
     background: orangered;
     color: white;
@@ -86,6 +90,7 @@ td:last-child {
     .next {
     }
     .calendar-title h2 {
+        text-align: center;
         color: $snow;
     }
 }

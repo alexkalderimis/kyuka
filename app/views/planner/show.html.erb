@@ -1,0 +1,34 @@
+<div class="calendar-header">
+    <div class="small-12 columns calendar-title">
+        <h2>
+            <%= @range.first.to_s :eby %> to <%= @range.last.to_s :eby %>
+        </h2>
+    </div>
+</div>
+<table class="calendar">
+    <thead>
+        <tr>
+            <th></th>
+            <% @range.each do |date| %>
+                <th><%= date.to_s :eby %></th>
+            <% end %>
+        </tr>
+    </thead>
+    <tbody>
+        <% @holidays.each do |name, days_off| %>
+          <tr>
+            <td><%= name %></td>
+            <% @range.each do |date| %>
+                <td>
+                    <div class="date">
+                        <% if days_off.include? date %>
+                            <span class="label holiday"></span>
+                        <% end %>
+                    </div>
+                </td>
+            <% end %>
+          </tr>
+        <% end %>
+    </tbody>
+</table>
+

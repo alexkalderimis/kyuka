@@ -6,6 +6,7 @@ class User < ActiveRecord::Base
     has_and_belongs_to_many :roles
     validates :identifier, :presence => true
 
+    # TODO: deal with overlapping leave
     def holiday_taken_in year
         year_range = Date.new(year, 1, 1) .. Date.new(year, 12, 31)
         bank_hols = TimePeriod.bankholiday.active.overlapping(year_range).to_a
@@ -23,7 +24,19 @@ class User < ActiveRecord::Base
 
     end
 
+    def has_day_off? date
+        not time_periods.active.overlapping(date .. date).empty?
+    end
+
+    def has_role? name
+        roles.find_by_name(name)
+    end
+
     def admin?
-        roles.find_by_name('admin')
+        has_role? 'admin'
+    end
+
+    def add_role name
+        roles << Role.find_or_create_by(name: name)
     end
 end
