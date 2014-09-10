@@ -4,7 +4,7 @@
 
 
 .splash {
-    background-image: image-url('river.jpg');
+    transition: background-image 3s ease-in-out;
     margin-left: -20px;
     margin-right: -20px;
     padding: 3em;
@@ -16,6 +16,18 @@
     .welcome .button {
         font-size: 64px;
     }
+}
+.splash.river {
+    background-image: image-url('river.jpg');
+}
+.splash.waka {
+    background-image: image-url('waka.jpg');
+}
+.splash.boat {
+    background-image: image-url('boat.jpg');
+}
+.splash.bridge {
+    background-image: image-url('bridge.jpg');
 }
 
 .top-bar-section {
