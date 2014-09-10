@@ -11,7 +11,7 @@
         <ul class="events">
             <% events.select{|e| e.includes(date)}.
                       sort_by{|e| e.start_date }.each do |time_off| %>
-                <li class="<%= time_off.category %> <%= time_off.status %>">
+                <li class="clearfix <%= time_off.category %> <%= time_off.status %>">
                     <% unless time_off.bankholiday? %>
                         <span class="right">
                             <%= render partial: 'time_periods/cancel_button', locals: {period: time_off, size: :tiny} %>

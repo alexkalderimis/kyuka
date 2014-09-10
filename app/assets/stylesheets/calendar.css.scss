@@ -49,6 +49,8 @@
         border-bottom: 1px solid white;
         .title {
             font-size: 14px;
+            padding-left: 1em;
+            text-align: center;
         }
         .button.tiny {
             padding-left: 10px;
@@ -99,6 +101,16 @@ td {
         }
         .button.tiny:hover {
             background: darken($success-color, 10%);
+        }
+    }
+    .medical {
+        background: $alert-color;
+        color: $alert-font-color;
+        .button.tiny {
+            background: $alert-color;
+        }
+        .button.tiny:hover {
+            background: darken($alert-color, 10%);
         }
     }
     .meeting {

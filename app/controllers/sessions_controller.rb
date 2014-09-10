@@ -17,7 +17,16 @@ class SessionsController < ApplicationController
             raise "Error authenticating"
           end
 
-          user.authorizations.build :provider => auth.provider, :uid => auth.uid
+          user.authorizations.build({
+              :provider => auth.provider,
+              :uid => auth.uid
+          })
+          user.allowances.build({
+              :year => Time.now.year,
+              :max_days => Settings.holiday.default_allowance
+          })
+          user_role = Role.find_or_create_by(name: 'user')
+          user.roles << user_role
           unless user.save
             raise "Error logging in"
           end

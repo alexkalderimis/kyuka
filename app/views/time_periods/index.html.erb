@@ -77,7 +77,7 @@
                             <% if period.start_date.nil? or period.end_date.nil? %>
                                 <em>Unknown length</em>
                             <% else %>
-                                <%= distance_of_time_in_words(period.start_date, period.end_date) %>
+                                <%= pluralize((period.end_date.to_date.jd - period.start_date.to_date.jd), "day") %>
                             <% end %>
                         </td>
                         <td><%= period.comment %></td>

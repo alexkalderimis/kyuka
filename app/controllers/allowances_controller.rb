@@ -1,5 +1,7 @@
 class AllowancesController < ApplicationController
 
+    before_action :authorize
+
     def new
         @user = User.find(params[:user_id])
         @allowance = @user.allowances.new({

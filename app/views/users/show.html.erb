@@ -57,7 +57,9 @@
         </table>
     <% end %>
 
-    <%= link_to 'Add allowance', new_user_allowance_path(@user), class: "button tiny" %>
+    <% if @current_user.admin? %>
+        <%= link_to 'Add allowance', new_user_allowance_path(@user), class: "button tiny" %>
+    <% end %>
   </div>
 </div>
 <div class="row">
@@ -81,7 +83,9 @@
         </table>
     <% end %>
 
-    <%= link_to 'Add role', new_user_role_path(@user), class: "button tiny" %>
+    <% if @current_user.admin? %>
+        <%= link_to 'Add role', new_user_role_path(@user), class: "button tiny" %>
+    <% end %>
   </div>
 </div>
 
