@@ -6,7 +6,7 @@
     <li class="<%= 'active' if request.env['PATH_INFO'] == month_path(Time.now.year, Time.now.month) %>">
         <%= link_to 'Your Calendar', month_path(Time.now.year, Time.now.month) %>
     </li>
-    <li class="<%= 'active' if request.env['PATH_INFO'] == planner_path(start: Date.current - 2.weeks, end: Date.current + 2.weeks) %>">
+    <li class="<%= 'active' if request.env['PATH_INFO'] == planner_path %>">
         <%= link_to 'View Planner', planner_path(start: Date.current - 2.weeks, end: Date.current + 2.weeks) %>
     </li>
     <% if current_user.admin? %>
