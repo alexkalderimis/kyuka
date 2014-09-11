@@ -2,7 +2,7 @@
 # All this logic will automatically be available in application.js.
 # You can use CoffeeScript in this file: http://coffeescript.org/
 
-classes = ['river', 'waka', 'mountains', 'boat', 'bridge']
+classes = ['river', 'bay', 'waka', 'mountains', 'boat', 'bridge']
 
 rotateSplashBg = ->
   splash = document.querySelector '.splash'
