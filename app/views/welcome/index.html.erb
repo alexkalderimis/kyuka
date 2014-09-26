@@ -4,9 +4,14 @@
         <% if @user %>
             <h2>Hello <%= @user.identifier %></h2>
         <% else %>
-            <%= link_to login_path, :class => "button" do %>
-                Log in to <span class="app-name">Kyuka</span>
-            <% end %>
+            <div class="row">
+                <div class="small-12 columns greeting">
+                    Log in to <span class="app-name">Kyuka</span>
+                </div>
+            </div>
+            <div class="row">
+                <%= render "sessions/providers" %>
+            </div>
         <% end %>
     </div>
 

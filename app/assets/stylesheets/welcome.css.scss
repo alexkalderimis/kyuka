@@ -2,6 +2,7 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
+@import 'foundation_and_overrides';
 
 .splash {
     transition: background-image 3s ease-in-out;
@@ -13,9 +14,21 @@
     align-items: center;
     justify-content: center;
 
-    .welcome .button {
-        font-size: 64px;
+    .welcome {
+        .greeting {
+            @include button;
+            cursor: normal;
+        }
+        .greeting, .button {
+            background-color: rgba($button-bg-color, 0.7);
+            font-size: 64px;
+        }
+        
+        ul .button:hover {
+            background-color: rgba($button-bg-color, 1);
+        }
     }
+
 }
 .splash.river {
     background-image: image-url('river.jpg');
