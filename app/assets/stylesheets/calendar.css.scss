@@ -40,6 +40,9 @@ table.month.calendar {
     background: #bcbcbc;
     color: white;
 }
+td.today {
+    background: $info-color;
+}
 
 .events {
     padding: 0;
@@ -101,36 +104,42 @@ td {
     .holiday {
         background: $success-color;
         color: $snow;
-        .button.tiny {
+        .button {
             background: $success-color;
         }
-        .button.tiny:hover {
+        .button:hover {
             background: darken($success-color, 10%);
         }
     }
     .medical {
         background: $alert-color;
         color: $alert-font-color;
-        .button.tiny {
+        .button {
             background: $alert-color;
         }
-        .button.tiny:hover {
+        .button:hover {
             background: darken($alert-color, 10%);
         }
     }
     .meeting {
         background: $info-color;
         color: $body-font-color;
-        .button.tiny {
+        .button {
             background: $info-color;
         }
-        .button.tiny:hover {
+        .button:hover {
             background: darken($info-color, 10%);
         }
     }
     .bankholiday {
         background: $warning-color;
         color: $snow;
+        .button {
+            background: $warning-color;
+        }
+        .button:hover {
+            background: darken($warning-color, 10%);
+        }
     }
     .cancelled {
         opacity: 0.5;

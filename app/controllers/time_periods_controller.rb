@@ -45,7 +45,10 @@ class TimePeriodsController < ApplicationController
     end
 
     def show
-        @period = @current_user.time_periods.find(params[:id])
+        @period = TimePeriod.where('user_id = :uid OR category = :cat', {
+            uid: @current_user.id,
+            cat: TimePeriod.categories[:bankholiday]
+        }).find(params[:id])
     end
 
     def update

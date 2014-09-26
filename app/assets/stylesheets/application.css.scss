@@ -39,3 +39,16 @@ main {
     display: flex;
     flex-direction: column;
 }
+
+.box {
+    display: flex;
+    flex-direction: column;
+
+    .header, .footer {
+        flex: 0 0 auto;
+    }
+    .content {
+        flex: 1 0 auto;
+    }
+}
+

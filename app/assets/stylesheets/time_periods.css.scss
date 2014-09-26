@@ -2,16 +2,35 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
+@import 'foundation_and_overrides';
+
 tr.cancelled {
     td {
     }
 }
 
-.details {
-  .row {
-    margin-bottom: 1em;
-  }
+.time-period {
+    .min-height: 80vh;
+    flex: 1 0 auto;
+
+    .header {
+        margin-bottom: 2em;
+    }
+
+    .details {
+        .row {
+            margin-bottom: 1em;
+        }
+    }
 }
 
+.calendar-header {
+    .calendar-title.bankholiday {
+        background: $warning-color;
+    }
+    .calendar-title.holiday {
+        background: $success-color;
+    }
+}
 
 
