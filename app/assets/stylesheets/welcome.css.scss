@@ -30,23 +30,11 @@
     }
 
 }
-.splash.river {
-    background-image: image-url('river.jpg');
-}
-.splash.waka {
-    background-image: image-url('waka.jpg');
-}
-.splash.boat {
-    background-image: image-url('boat.jpg');
-}
-.splash.bridge {
-    background-image: image-url('bridge.jpg');
-}
-.splash.mountains {
-    background-image: image-url('mountains.jpg');
-}
-.splash.bay {
-    background-image: image-url('bay.jpg');
+
+@each $bkg in river, waka, boat, chamois, bridge, mountains, bay, alp {
+    .splash.#{$bkg} {
+        background-image: image-url('#{$bkg}.jpg');
+    }
 }
 
 .top-bar-section {
