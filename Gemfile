@@ -4,6 +4,8 @@ group :development do
     gem 'rails_layout'
 end
 
+gem 'did_you_mean', group: [:development, :test]
+
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.1.5'
 gem 'rails_12factor', group: :production
